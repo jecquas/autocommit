@@ -59,4 +59,4 @@ if (commit) {
   await $`git commit -m ${commit}`;
 }
 
-echo(`Done ✨`);
+echo(`Done`);
