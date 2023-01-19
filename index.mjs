@@ -32,9 +32,8 @@ if (!stdout.trim().length) {
 const completion = await spinner("Thinking ...", async () => {
   return await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: `${stdout.trim()} \n Write a commit message for this diff.\n\n`,
+    prompt: `${stdout.trim()} \n give me a commit message\n`,
     n: 3,
-    stop: "\n",
     max_tokens: 200,
     temperature: 0.4,
   });
