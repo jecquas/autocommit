@@ -23,16 +23,18 @@ try {
   process.exit(1);
 }
 
-const { stdout } = await $`git diff HEAD`;
+const { stdout } = await $`git diff --staged`;
 if (!stdout.trim().length) {
   console.log("No changes staged. Did you run `git add` ?");
   process.exit(1);
 }
 
+const prompt = `Here is a diff :\n ${stdout.trim()} \n Generate a clear and concise commit message for it\n`;
+
 const completion = await spinner("Thinking ...", async () => {
   return await openai.createCompletion({
     model: "text-davinci-003",
-    prompt: `${stdout.trim()} \n give me a commit message\n`,
+    prompt,
     n: 3,
     max_tokens: 200,
     temperature: 0.4,
