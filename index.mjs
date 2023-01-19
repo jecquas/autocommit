@@ -32,13 +32,18 @@ if (!stdout.trim().length) {
 const prompt = `Here is a diff :\n ${stdout.trim()} \n Generate a commit message for it, using conventional commit format :\n`;
 
 const completion = await spinner("Thinking ...", async () => {
-  return await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt,
-    n: 3,
-    max_tokens: 200,
-    temperature: 0.3,
-  });
+  try {
+    return await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt,
+      n: 3,
+      max_tokens: 200,
+      temperature: 0.3,
+    });
+  } catch (err) {
+    console.error("An error occured while getting your data");
+    process.exit(1);
+  }
 });
 
 const { commit } = await inquirer.prompt({
