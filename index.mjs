@@ -29,7 +29,8 @@ if (!stdout.trim().length) {
   process.exit(1);
 }
 
-const prompt = `Here is a diff :\n ${stdout.trim()} \n Generate a commit message for it, using conventional commit format :\n`;
+// const prompt = `Here is a diff :\n ${stdout.trim()} \n Generate a commit message for it, using conventional commit format :\n`;
+const prompt = `You are an experienced programmer. Generate a commit message for the following diff, using conventional commit format.\n${stdout}\n Commit message : `;
 
 const completion = await spinner("Thinking ...", async () => {
   try {
