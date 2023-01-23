@@ -41,6 +41,7 @@ const completion = await spinner("Thinking ...", async () => {
       temperature: 0.3,
     });
   } catch (err) {
+    console.error(err);
     console.error("An error occured while getting your data");
     process.exit(1);
   }
@@ -49,7 +50,7 @@ const completion = await spinner("Thinking ...", async () => {
 const { commit } = await inquirer.prompt({
   name: "commit",
   type: "list",
-  message: "Choose one of these commit messages\n",
+  message: "Choose one of these commit messages :\n",
   choices: [
     ...completion?.data?.choices.map((choice) => ({
       name: choice.text.trim(),
